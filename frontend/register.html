@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Task Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        async function register() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('http://localhost:8080/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                alert('User registered successfully!');
+                window.location.href = 'login.html'; // Redirect to login page
+            } else {
+                alert('Registration failed. Username might already exist.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <div class="form-group">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button onclick="register()">Register</button>
+            <button onclick="window.location.href='index.html'">Back</button>
+        </div>
+    </div>
+</body>
+</html>
